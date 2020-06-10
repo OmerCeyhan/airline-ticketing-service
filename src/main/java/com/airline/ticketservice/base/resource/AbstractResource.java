@@ -18,12 +18,6 @@ public class AbstractResource implements Serializable {
 
     protected String updateDate;
 
-    protected boolean success;
-
-    protected String message;
-
-    protected ResultCode resultCode;
-
     public Long getId() {
         return id;
     }
@@ -54,30 +48,6 @@ public class AbstractResource implements Serializable {
 
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public ResultCode getResultCode() {
-        return resultCode;
-    }
-
-    public void setResultCode(ResultCode resultCode) {
-        this.resultCode = resultCode;
     }
 
     @Override
