@@ -14,9 +14,9 @@ public class AbstractResource implements Serializable {
 
     protected Long rowVersion;
 
-    protected String createDate;
+    protected String createdDate;
 
-    protected String updateDate;
+    protected String updatedDate;
 
     public Long getId() {
         return id;
@@ -34,20 +34,20 @@ public class AbstractResource implements Serializable {
         this.rowVersion = rowVersion;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getUpdateDate() {
-        return updateDate;
+    public String getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
     @Override
