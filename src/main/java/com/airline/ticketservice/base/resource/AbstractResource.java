@@ -1,6 +1,5 @@
 package com.airline.ticketservice.base.resource;
 
-import com.airline.ticketservice.base.type.ResultCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
