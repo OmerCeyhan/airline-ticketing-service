@@ -10,4 +10,6 @@ import javax.persistence.Table;
 @Entity(name = "airfield")
 @Table(name = "airfield")
 public class Airfield extends BaseEntity {
+
+    private String name;
 }
