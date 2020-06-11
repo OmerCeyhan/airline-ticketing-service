@@ -6,4 +6,5 @@ import lombok.Data;
 @Data
 public class AirfieldResource extends AbstractResource {
     private String name;
+    private String city;
 }

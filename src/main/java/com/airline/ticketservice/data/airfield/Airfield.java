@@ -12,4 +12,6 @@ import javax.persistence.Table;
 public class Airfield extends BaseEntity {
 
     private String name;
+
+    private String city;
 }
