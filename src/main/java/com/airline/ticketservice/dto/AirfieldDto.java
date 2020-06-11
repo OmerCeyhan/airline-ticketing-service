@@ -5,4 +5,5 @@ import lombok.Data;
 
 @Data
 public class AirfieldDto extends AbstractDto {
+    private String name;
 }
