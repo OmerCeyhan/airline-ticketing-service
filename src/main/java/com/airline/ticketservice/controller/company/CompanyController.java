@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.airline.ticketservice.constant.WebConstants.API_PREFIX_URL;
-//Company, Airfield, FlightRoute, Flight(Havayolu şirketine uçuş tanımlanabilmeli, aranabilmeli.), Ticket
 @RestController
 @RequestMapping(API_PREFIX_URL + "/company")
 public class CompanyController extends AbstractEntityController<CompanyDto, Company, CompanyResource, Long> {
