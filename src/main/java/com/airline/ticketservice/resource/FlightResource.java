@@ -5,4 +5,14 @@ import lombok.Data;
 
 @Data
 public class FlightResource extends AbstractResource {
+
+    private String name;
+
+    private Integer numberOfCustomers;
+
+    private Integer customerQuota;
+
+    private FlightRouteResource flightRoute;
+
+    private CompanyResource company;
 }
