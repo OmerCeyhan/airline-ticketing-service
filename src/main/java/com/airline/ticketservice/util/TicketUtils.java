@@ -1,5 +1,8 @@
 package com.airline.ticketservice.util;
 
+import com.airline.ticketservice.exception.BadRequestException;
+import com.airline.ticketservice.type.ErrorMessage;
+
 import java.math.BigDecimal;
 
 import static com.airline.ticketservice.constant.TicketConstants.*;
@@ -31,10 +34,10 @@ public class TicketUtils {
     public static String formatCreditCardNumber(String creditCartNumber) {
         creditCartNumber = removeSpecialCharacters(creditCartNumber);
         creditCartNumber = hideCreditCardNumberDigits(creditCartNumber);
-        if (creditCartNumber.length() != CREDIT_CART_NUMBER_LENGTH){
-            // TODO: 11.06.2020 throw new BadRequestException (CREDIT_CARD_NUMBER_NOT_VALID)
+        if (creditCartNumber.length() != CREDIT_CART_NUMBER_LENGTH) {
+            throw new BadRequestException(ErrorMessage.CREDIT_CARD_FORMAT_FALSE);
         }
-            return creditCartNumber;
+        return creditCartNumber;
     }
 
 
