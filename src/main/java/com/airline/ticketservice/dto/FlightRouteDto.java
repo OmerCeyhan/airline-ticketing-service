@@ -5,4 +5,8 @@ import lombok.Data;
 
 @Data
 public class FlightRouteDto extends AbstractDto {
+
+    private AirfieldDto fromAirfield;
+
+    private AirfieldDto toAirfield;
 }
