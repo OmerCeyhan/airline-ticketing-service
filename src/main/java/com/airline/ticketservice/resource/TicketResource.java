@@ -12,7 +12,7 @@ public class TicketResource extends AbstractResource {
 
     private String ownerSurname;
 
-    private Integer ticketNumber;
+    private String ticketNumber;
 
     private String creditCartNumber;
 
