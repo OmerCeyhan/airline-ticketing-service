@@ -18,21 +18,8 @@ public abstract class AbstractEntityService<T extends BaseEntity, PK extends Ser
 
     public abstract BaseRepository<T, PK> getRepository();
 
-    protected T verifySave(T entity) {
-        return entity;
-    }
-
-    protected T verifyPut(T theReal, T forSave) {
-        return forSave;
-    }
-
-    protected T verifyDelete(T entity) {
-        return entity;
-    }
-
     @Transactional
     public T save(T entity) {
-        verifySave(entity);
         entity = getRepository().save(entity);
         LOGGER.info("Record saved: " + entity.toString());
         return entity;
@@ -44,7 +31,6 @@ public abstract class AbstractEntityService<T extends BaseEntity, PK extends Ser
         forSave.setId(theReal.getId());
         forSave.setCreatedDate(theReal.getCreatedDate());
         forSave.setRowVersion(theReal.getRowVersion());
-        verifyPut(theReal, forSave);
         forSave = getRepository().save(forSave);
         LOGGER.info("Record updated: " + forSave.toString());
         return forSave;
@@ -53,13 +39,11 @@ public abstract class AbstractEntityService<T extends BaseEntity, PK extends Ser
     @Transactional
     public void delete(PK id) {
         T entity = getEntity(id);
-        verifyDelete(entity);
         LOGGER.info("Deleting record: " + entity.toString());
         getRepository().delete(entity);
     }
 
     public T getEntity(PK id) {
-
         Optional<T> entity = getRepository().findById(id);
         return entity.orElse(null);
     }
