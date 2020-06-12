@@ -8,6 +8,8 @@ import com.airline.ticketservice.dto.CompanyDto;
 import com.airline.ticketservice.resource.CompanyResource;
 import com.airline.ticketservice.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,5 +32,10 @@ public class CompanyController extends AbstractEntityController<CompanyDto, Comp
     @Override
     protected Converter<CompanyDto, Company, CompanyResource> getConverter() {
         return companyMapper;
+    }
+
+    @GetMapping("/name/{name}")
+    public CompanyResource getByName(@PathVariable("name")String name){
+        return toResource(companyService.getByName(name));
     }
 }
