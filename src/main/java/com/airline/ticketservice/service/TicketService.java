@@ -9,6 +9,8 @@ import com.airline.ticketservice.exception.BadRequestException;
 import com.airline.ticketservice.type.ErrorMessage;
 import com.airline.ticketservice.type.TicketStatus;
 import com.airline.ticketservice.util.TicketUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.Optional;
 @Service
 public class TicketService extends AbstractEntityService<Ticket, Long> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TicketService.class);
     @Autowired
     private FlightService flightService;
 
@@ -44,7 +47,9 @@ public class TicketService extends AbstractEntityService<Ticket, Long> {
         flightService.put(flight.getId(), flight);
         entity = super.save(entity);
         entity.setTicketNumber(flight.getName() + entity.getId());
-        return put(entity.getId(), entity);
+        entity = put(entity.getId(), entity);
+        LOGGER.info("A ticket has been successfully bought by customer:" + entity.getOwnerName() + " " + entity.getOwnerSurname() + "to flight:" + flight.getName());
+        return entity;
     }
 
     public Optional<Ticket> getByTicketNumber(String ticketNumber) {
@@ -60,6 +65,7 @@ public class TicketService extends AbstractEntityService<Ticket, Long> {
         optionalTicket.ifPresent(ticket -> {
             ticket.setTicketStatus(TicketStatus.CANCELLED);
             this.put(ticket.getId(), ticket);
+            LOGGER.info("A ticket has been successfully cancelled of customer:" + ticket.getOwnerName() + " " + ticket.getOwnerSurname() + "of flight:" + ticket.getFlight().getName());
         });
         Flight flight = flightService.getEntity(optionalTicket.get().getFlight().getId());
         if (flight == null) {
@@ -67,7 +73,6 @@ public class TicketService extends AbstractEntityService<Ticket, Long> {
         }
         flight.setNumberOfCustomers(flight.getNumberOfCustomers() - 1);
         flightService.put(flight.getId(), flight);
-
         return optionalTicket;
     }
 }
