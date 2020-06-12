@@ -5,7 +5,7 @@ public enum ErrorMessage {
     FLIGHT_COULD_NOT_FOUND("Flight could not be found!"),
 
     //OPERATIONAL
-    CREDIT_CARD_FORMAT_FALSE("Credit cart format is false!"),
+    FALSE_CREDIT_CARD_FORMAT("Credit cart format is false!"),
     FLIGHT_QUOTA_FULL("Ticket Limit Exceeded");
 
     private String errorMessage;
