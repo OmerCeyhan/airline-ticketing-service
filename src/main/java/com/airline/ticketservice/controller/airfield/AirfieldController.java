@@ -8,6 +8,8 @@ import com.airline.ticketservice.dto.AirfieldDto;
 import com.airline.ticketservice.resource.AirfieldResource;
 import com.airline.ticketservice.service.AirfieldService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,5 +33,10 @@ public class AirfieldController extends AbstractEntityController<AirfieldDto, Ai
     @Override
     protected Converter<AirfieldDto, Airfield, AirfieldResource> getConverter() {
         return airfieldMapper;
+    }
+
+    @GetMapping("/name/{name}")
+    public AirfieldResource getByAirfieldName(@PathVariable("name") String name) {
+        return toResource(airfieldService.getByAirfieldName(name));
     }
 }
