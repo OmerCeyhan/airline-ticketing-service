@@ -11,6 +11,8 @@ import com.airline.ticketservice.util.TicketUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class TicketService extends AbstractEntityService<Ticket, Long> {
 
@@ -44,4 +46,7 @@ public class TicketService extends AbstractEntityService<Ticket, Long> {
         return put(entity.getId(), entity);
     }
 
+    public Optional<Ticket> getByTicketNumber(String ticketNumber) {
+        return ticketRepository.findByTicketNumber(ticketNumber);
+    }
 }

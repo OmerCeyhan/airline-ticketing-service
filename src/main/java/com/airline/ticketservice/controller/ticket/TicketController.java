@@ -8,6 +8,8 @@ import com.airline.ticketservice.dto.TicketDto;
 import com.airline.ticketservice.resource.TicketResource;
 import com.airline.ticketservice.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +31,10 @@ public class TicketController extends AbstractEntityController<TicketDto, Ticket
     @Override
     protected Converter<TicketDto, Ticket, TicketResource> getConverter() {
         return ticketMapper;
+    }
+
+    @GetMapping("/ticket-number/{ticketNumber}")
+    public TicketResource getByTicketNumber(@PathVariable("ticketNumber") String ticketNumber) {
+        return toResource(ticketService.getByTicketNumber(ticketNumber));
     }
 }
