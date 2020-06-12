@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -17,7 +18,9 @@ import javax.persistence.Table;
 @Table(name = "airfield")
 public class Airfield extends BaseEntity {
 
+    @NotNull(message = "Name cannot be null")
     private String name;
 
+    @NotNull(message = "City cannot be null")
     private String city;
 }

@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -25,6 +26,7 @@ import java.util.List;
 @Table(name = "company")
 public class Company extends BaseEntity {
 
+    @NotNull(message = "Company name cannot be null.")
     @Column(name = "name")
     private String name;
 

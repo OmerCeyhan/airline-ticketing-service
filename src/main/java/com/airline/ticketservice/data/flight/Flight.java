@@ -36,10 +36,12 @@ public class Flight extends BaseEntity {
     @NotNull(message = "You must define flight's base price.")
     private BigDecimal basePrice;
 
+    @NotNull(message = "You must choose a flight route")
     @ManyToOne
     @JoinColumn(name = "route_id")
     private FlightRoute flightRoute;
 
+    @NotNull(message = "You must choose owner company for this flight")
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "company_id")

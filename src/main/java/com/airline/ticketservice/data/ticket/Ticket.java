@@ -13,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Getter
@@ -22,19 +23,25 @@ import java.math.BigDecimal;
 @Table(name = "ticket")
 public class Ticket extends BaseEntity {
 
+    @NotNull(message = "Customer name must be entered")
     private String ownerName;
 
+    @NotNull(message = "Customer surname must be entered")
     private String ownerSurname;
 
     private String ticketNumber;
 
+    @NotNull(message = "Credit card must be entered")
     private String creditCartNumber;
 
+    @NotNull(message = "Ticket price cannot be null")
     private BigDecimal ticketPrice;
 
+    @NotNull(message = "Ticket status cannot be null")
     @Enumerated(EnumType.STRING)
     private TicketStatus ticketStatus = TicketStatus.ACTIVE;
 
+    @NotNull(message = "Ticket must be connected to a flight")
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
