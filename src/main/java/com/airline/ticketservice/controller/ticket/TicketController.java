@@ -40,6 +40,7 @@ public class TicketController extends AbstractEntityController<TicketDto, Ticket
         return toResource(ticketService.getByTicketNumber(ticketNumber));
     }
 
+    @Transactional
     @DeleteMapping("/ticket-number/{ticketNumber}")
     public TicketResource cancelTicketByTicketNumber(@PathVariable("ticketNumber") String ticketNumber) {
         return toResource(ticketService.cancelTicketByTicketNumber(ticketNumber));
