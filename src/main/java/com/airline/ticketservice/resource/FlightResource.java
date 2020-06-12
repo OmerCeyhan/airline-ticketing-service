@@ -18,5 +18,5 @@ public class FlightResource extends AbstractResource {
 
     private FlightRouteResource flightRoute;
 
-    private CompanyResource company;
+    private String companyName;
 }
