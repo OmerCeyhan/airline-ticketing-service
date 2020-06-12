@@ -2,11 +2,14 @@ package com.airline.ticketservice.data.ticket;
 
 import com.airline.ticketservice.base.data.entity.BaseEntity;
 import com.airline.ticketservice.data.flight.Flight;
+import com.airline.ticketservice.type.TicketStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -28,6 +31,9 @@ public class Ticket extends BaseEntity {
     private String creditCartNumber;
 
     private BigDecimal ticketPrice;
+
+    @Enumerated(EnumType.STRING)
+    private TicketStatus ticketStatus = TicketStatus.ACTIVE;
 
     @ManyToOne
     @JoinColumn(name = "flight_id")

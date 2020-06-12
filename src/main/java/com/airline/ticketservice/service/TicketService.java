@@ -7,6 +7,7 @@ import com.airline.ticketservice.data.ticket.Ticket;
 import com.airline.ticketservice.data.ticket.TicketRepository;
 import com.airline.ticketservice.exception.BadRequestException;
 import com.airline.ticketservice.type.ErrorMessage;
+import com.airline.ticketservice.type.TicketStatus;
 import com.airline.ticketservice.util.TicketUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,25 @@ public class TicketService extends AbstractEntityService<Ticket, Long> {
 
     public Optional<Ticket> getByTicketNumber(String ticketNumber) {
         return ticketRepository.findByTicketNumber(ticketNumber);
+    }
+
+    public Optional<Ticket> cancelTicketByTicketNumber(String ticketNumber) {
+
+        Optional<Ticket> optionalTicket = ticketRepository.findByTicketNumber(ticketNumber);
+        if (!optionalTicket.isPresent()) {
+            throw new BadRequestException(ErrorMessage.TICKET_COULD_NOT_FOUND);
+        }
+        optionalTicket.ifPresent(ticket -> {
+            ticket.setTicketStatus(TicketStatus.CANCELLED);
+            this.put(ticket.getId(), ticket);
+        });
+        Flight flight = flightService.getEntity(optionalTicket.get().getFlight().getId());
+        if (flight == null) {
+            throw new BadRequestException(ErrorMessage.FLIGHT_COULD_NOT_FOUND);
+        }
+        flight.setNumberOfCustomers(flight.getNumberOfCustomers() - 1);
+        flightService.put(flight.getId(), flight);
+
+        return optionalTicket;
     }
 }
