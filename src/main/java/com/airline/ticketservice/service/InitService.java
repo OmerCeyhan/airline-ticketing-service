@@ -35,10 +35,10 @@ public class InitService {
         company.setName("Pegasus");
         companyService.save(company);
 
-        Airfield istanbulAirfield = new Airfield("Istanbul Havalimanı", "Istanbul");
+        Airfield istanbulAirfield = new Airfield("Istanbul Havalimani", "Istanbul");
         airfieldService.save(istanbulAirfield);
 
-        Airfield malatyaAirfield = new Airfield("Malatya Havalimanı", "Malatya");
+        Airfield malatyaAirfield = new Airfield("Malatya Havalimani", "Malatya");
         airfieldService.save(malatyaAirfield);
 
         FlightRoute route = new FlightRoute(istanbulAirfield, malatyaAirfield);
