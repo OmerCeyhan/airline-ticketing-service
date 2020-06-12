@@ -4,6 +4,7 @@ import com.airline.ticketservice.exception.BadRequestException;
 import com.airline.ticketservice.type.ErrorMessage;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static com.airline.ticketservice.constant.TicketConstants.*;
 
@@ -28,15 +29,15 @@ public class TicketUtils {
             tenPercentOfCurrentPrice = tenPercentOfCurrentPrice.multiply(BigDecimal.valueOf(10.00));
             currentPrice = currentPrice.add(tenPercentOfCurrentPrice);
         }
-        return currentPrice;
+        return currentPrice.setScale(2, RoundingMode.HALF_DOWN);
     }
 
     public static String formatCreditCardNumber(String creditCartNumber) {
         creditCartNumber = removeSpecialCharacters(creditCartNumber);
-        creditCartNumber = hideCreditCardNumberDigits(creditCartNumber);
         if (creditCartNumber.length() != CREDIT_CART_NUMBER_LENGTH) {
-            throw new BadRequestException(ErrorMessage.CREDIT_CARD_FORMAT_FALSE);
+            throw new BadRequestException(ErrorMessage.FALSE_CREDIT_CARD_FORMAT);
         }
+        creditCartNumber = hideCreditCardNumberDigits(creditCartNumber);
         return creditCartNumber;
     }
 
